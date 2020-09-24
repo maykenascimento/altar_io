@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { CodeGeneratorService } from './services/code-generator.service';
+import { PaymentDataService } from './services/payment-data.service';
+
+// Http services
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,9 +19,10 @@ import { CodeGeneratorService } from './services/code-generator.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [CodeGeneratorService],
+  providers: [CodeGeneratorService, PaymentDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
