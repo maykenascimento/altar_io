@@ -11,33 +11,33 @@ export class GeneratorComponent implements OnInit {
   // Countdown timer uses to lock user input
   entryLocked: boolean = false;
 
-  constructor(private _codeGenerator: CodeGeneratorService) {
+  constructor(private codeGeneratorService: CodeGeneratorService) {
   }
 
   ngOnInit(): void {
   }
   
   public get currentCode() : string {
-    return this._codeGenerator.FinalCode;
+    return this.codeGeneratorService.FinalCode;
   }
 
   public get listCharacteres() {
-    return this._codeGenerator.DataList;
+    return this.codeGeneratorService.DataList;
   }
 
   public get userInput() : string {
-    return this._codeGenerator.GetUserInput;
+    return this.codeGeneratorService.GetUserInput;
   }
   
   public get isRunning() : boolean {
-    return this._codeGenerator.IsRunning;
+    return this.codeGeneratorService.IsRunning;
   }
 
   // Set the user input value to the generator service
   setUserInput(event: any) {
     var value: string = event.target.value.toString();
 
-    if (this._codeGenerator.GetUserInput != value) {
+    if (this.codeGeneratorService.GetUserInput != value) {
       // Lock the user input for 4 seconds
       this.entryLocked = true;
       setTimeout(() => {
@@ -47,13 +47,13 @@ export class GeneratorComponent implements OnInit {
       if (value.length > 1) {
         value = value.substr(0, 1);
       }
-      this._codeGenerator.setUserValue = value;
+      this.codeGeneratorService.setUserValue = value;
     }
   }
   
   // Start to generate the random list
   startGenerate(){
-    this._codeGenerator.startTimer();
+    this.codeGeneratorService.startTimer();
   }
   
 }
