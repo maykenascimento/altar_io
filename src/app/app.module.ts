@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 import { PaymentsComponent } from './components/payments/payments.component';
+import { CodeGeneratorService } from './services/code-generator.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { PaymentsComponent } from './components/payments/payments.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CodeGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
