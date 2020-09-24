@@ -24,16 +24,22 @@ export class CodeGeneratorService {
   public set SetUserInput(v: string) {
     this.userInput = v;
   }
-  
-  public get GetUserInput() : string {
+
+  // Letter that user can enter
+  private isRunning: boolean;
+  public get IsRunning(): boolean {
+    return this.isRunning;
+  }
+
+  public get GetUserInput(): string {
     return this.userInput;
   }
-  
+
   private time = new Date();
   private interval;
 
   constructor() {
-    this.startTimer();
+    this.finalCode = "--";
   }
 
   generateSequence() {
