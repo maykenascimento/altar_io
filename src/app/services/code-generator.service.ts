@@ -6,22 +6,22 @@ import { Injectable } from '@angular/core';
 export class CodeGeneratorService {
   // Matrix used to genared random combinations
   private matrix: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  
+
   // Two-dimensional array to store random letters
   private dataList: Array<Array<string>> = [];
-  public get DataList() : Array<Array<string>> {
+  public get DataList(): Array<Array<string>> {
     return this.dataList
   }
-  
+
   // The result after calculated
   private finalCode: string;
-  public get FinalCode() : string {
+  public get FinalCode(): string {
     return this.finalCode;
   }
-  
+
   // Letter that user can enter
   private userInput: string;
-  public set SetUserInput(v : string) {
+  public set SetUserInput(v: string) {
     this.userInput = v;
   }
   
@@ -39,10 +39,31 @@ export class CodeGeneratorService {
   generateSequence() {
     var sequences = new Array<Array<string>>();
 
-    for (let x = 0; x < 10; x++) {
-      var newRow = new Array();
-      for (let y = 0; y < 10; y++) {
-        newRow.push(this.matrix[Math.floor(Math.random() * this.matrix.length)]);
+    // Set 20% of the cells if a character if proided
+    var fixedIndexes: Array<number> = [];
+    if (this.userInput) {
+      // Create an array list with 20 random numbers with values between 0 and 99
+      // to define a fixed character when provided by the user
+      do {
+        let randomValue = Math.floor(Math.random() * 100);
+        if (!fixedIndexes.includes(randomValue)) {
+          fixedIndexes.push(randomValue);
+        }
+      } while (fixedIndexes.length < 20);
+    }
+
+    // Populate the matrix
+    for (let y = 0; y < 10; y++) {
+      let newRow = new Array();
+      for (let x = 0; x < 10; x++) {
+        // Get a random value in a string list
+        let cellValue = this.matrix[Math.floor(Math.random() * this.matrix.length)];
+        const position = parseInt(`${x}${y}`);
+        // Check if user input value is provided and position match with the value randomised
+        if (fixedIndexes && fixedIndexes.length > 0 && fixedIndexes.includes(position)) {
+          cellValue = this.userInput;
+        }
+        newRow.push(cellValue);
       }
       sequences.push(newRow);
     }
@@ -51,6 +72,7 @@ export class CodeGeneratorService {
     this.calcCode();
   }
 
+  // This function will get two positions of the character array based on second time
   private calcCode() {
     const seconds = ("00" + this.time.getSeconds()).slice(-2);
     const splited = Array.from(seconds);
@@ -65,7 +87,6 @@ export class CodeGeneratorService {
 
     for (let row = 0; row < 10; row++) {
       for (let column = 0; column < 10; column++) {
-        // if (this.list[row][column] < lowestInteger)
         if (this.dataList[row][column] == letter1) {
           firstLetterCount += 1;
         }
@@ -101,7 +122,7 @@ export class CodeGeneratorService {
     this.userInput = value;
   }
 
-  private startTimer() {
+  public startTimer() {
     this.stopTimer();
     this.interval = setInterval(() => {
       this.time = new Date();
@@ -110,9 +131,10 @@ export class CodeGeneratorService {
         this.generateSequence();
       }
     }, 1000);
+    this.generateSequence();
   }
 
-  private stopTimer() {
+  public stopTimer() {
     clearInterval(this.interval);
     this.interval = undefined;
   }
