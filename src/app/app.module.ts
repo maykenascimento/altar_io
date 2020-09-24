@@ -11,6 +11,8 @@ import { PaymentDataService } from './services/payment-data.service';
 // Http services
 import { HttpClientModule } from '@angular/common/http';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CodeGeneratorService, PaymentDataService],
   bootstrap: [AppComponent]
