@@ -5,8 +5,9 @@ import { PaymentsComponent } from './components/payments/payments.component';
 
 
 const routes: Routes = [
-  { path: "/generator", component: GeneratorComponent },
-  { path: "/payments", component: PaymentsComponent },
+  { path: "", redirectTo: "generator", pathMatch: "full" },
+  { path: "generator", component: GeneratorComponent },
+  { path: "payments", component: PaymentsComponent },
 ];
 
 @NgModule({
