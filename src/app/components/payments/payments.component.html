@@ -1,1 +1,44 @@
-<p>payments works!</p>
+<div class="is-running">
+    <div class="signal" [ngClass]="{'running': isRunning}"></div> Live
+</div>
+<div class="show-code">Your code: {{ currentCode }}</div>
+<div class="action-controls">
+    <form [formGroup]="paymentForm">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><label for="paymentName">Payment</label></td>
+                    <td><label for="amount">Amount</label></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="paymentNameEntry" #paymentName placeholder="Name" formControlName="name"></td>
+                    <td><input type="number" name="amountEntry" #amount placeholder="Ammount" formControlName="amount"></td>
+                    <td><button type="submit" class="btn btn-primary" (click)="addPayment()" [disabled]="!paymentForm.valid">+ Add</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <p>Payment List</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Code</th>
+                <th>Grid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payment of payments">
+                <td>{{ payment.name }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.code }}</td>
+                <td>{{ payment.gridCount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<button [routerLink]="['/generator']">Code generator</button>

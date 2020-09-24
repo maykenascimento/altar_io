@@ -10,7 +10,8 @@ export class CodeGeneratorService {
   // Two-dimensional array to store random letters
   private dataList: Array<Array<string>> = [];
   public get DataList(): Array<Array<string>> {
-    return this.dataList
+    // Get a clone from the list
+    return [].concat(this.dataList);
   }
 
   // The result after calculated
@@ -21,8 +22,8 @@ export class CodeGeneratorService {
 
   // Letter that user can enter
   private userInput: string;
-  public set SetUserInput(v: string) {
-    this.userInput = v;
+  public set SetUserInput(value: string) {
+    this.userInput = value;
   }
 
   // Letter that user can enter
@@ -138,10 +139,12 @@ export class CodeGeneratorService {
       }
     }, 1000);
     this.generateSequence();
+    this.isRunning = true;
   }
 
   public stopTimer() {
     clearInterval(this.interval);
     this.interval = undefined;
+    this.isRunning = false;
   }
 }
