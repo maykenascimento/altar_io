@@ -1,1 +1,17 @@
-<p>generator works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col"><input type="text" maxlength="1" (keyup)="setUserInput($event)" value="{{userInput}}" [disabled]="entryLocked"></div>
+        <div class="col fill-space"></div>
+        <div class="col"><button (click)="startGenerate()">Generate 2D Grid</button></div>
+    </div>
+    <table>
+        <tr *ngFor="let row of listCharacteres">
+            <td *ngFor="let column of row">{{ column }}</td>
+        </tr>
+    </table>
+    <div class="is-running">
+        <div class="signal" [ngClass]="{'running': isRunning}"></div> Live</div>
+    <div class="show-code">Your code: {{ currentCode }}</div>
+</div>
+
+<button [routerLink]="['/payments']">payments</button>
