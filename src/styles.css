@@ -1,1 +1,143 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+label {
+    text-transform: uppercase;
+}
+
+.container {
+    width: 100%;
+    max-width: 750px;
+    display: block;
+    margin: 10px auto;
+}
+
+.row {
+    display: flex;
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+
+table.table-border {
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+table.table-border,
+table.table-border th,
+table.table-border td {
+    border: solid 1px #bbbbbb;
+}
+
+table.table-border th,
+table.table-border td {
+    padding: 15px;
+}
+
+input[type="text"],
+input[type="number"] {
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    margin-right: 10px;
+}
+
+input[type="text"]:disabled {
+    background: #dddddd;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 9pt;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+input.btn,
+button.btn {
+    border: 1px solid #ccc!important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input.btn-filled,
+button.btn-filled {
+    background-color: #6a7479;
+    color: #ffffff;
+}
+
+h5 {
+    color: #6a7479;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.main-menu {
+    margin-bottom: 40px;
+    border-bottom: solid 1px #ccc;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.signal {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    display: block;
+    margin: 10px auto;
+}
+
+.signal.is-running {
+    background-color: green;
+}
+
+.show-code {
+    border: 1px solid #ccc!important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px auto;
+}
+
+.div-frame {
+    padding: 10px 20px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.user-char {
+    width: 80px;
+}
+
+.action-controls {
+    margin-top: 20px;
+}
+
+.generate-button {
+    margin-top: 24px;
+}

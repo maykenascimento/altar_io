@@ -1,44 +1,67 @@
-<div class="is-running">
-    <div class="signal" [ngClass]="{'running': isRunning}"></div> Live
-</div>
-<div class="show-code">Your code: {{ currentCode }}</div>
-<div class="action-controls">
-    <form [formGroup]="paymentForm">
-        <table class="table">
-            <tbody>
+<div class="container">
+    <div class="row main-menu">
+        <div class="col-auto">
+            <button class="btn" [routerLink]="['/generator']">Code generator</button>
+        </div>
+        <div class="col">
+            <div class="div-frame">Payments</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <div class="signal" [ngClass]="{'is-running': isRunning}"></div> Live
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <div class="show-code">Your code now: {{ currentCode }}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="action-controls col">
+            <form [formGroup]="paymentForm">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label for="paymentName">Payment</label></td>
+                            <td><label for="amount">Amount</label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="paymentNameEntry" #paymentName placeholder="Name" formControlName="name"></td>
+                            <td><input type="number" name="amountEntry" #amount placeholder="Ammount" formControlName="amount"></td>
+                            <td><button type="submit" class="btn btn-primary" (click)="addPayment()" [disabled]="!paymentForm.valid">+ Add</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h5>Payment List</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-border col">
+            <thead>
                 <tr>
-                    <td><label for="paymentName">Payment</label></td>
-                    <td><label for="amount">Amount</label></td>
-                    <td></td>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Code</th>
+                    <th>Grid</th>
                 </tr>
-                <tr>
-                    <td><input type="text" name="paymentNameEntry" #paymentName placeholder="Name" formControlName="name"></td>
-                    <td><input type="number" name="amountEntry" #amount placeholder="Ammount" formControlName="amount"></td>
-                    <td><button type="submit" class="btn btn-primary" (click)="addPayment()" [disabled]="!paymentForm.valid">+ Add</button></td>
+            </thead>
+            <tbody>
+                <tr *ngFor="let payment of payments">
+                    <td>{{ payment.name }}</td>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.code }}</td>
+                    <td>{{ payment.gridCount }}</td>
                 </tr>
             </tbody>
         </table>
-    </form>
-    <p>Payment List</p>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Amount</th>
-                <th>Code</th>
-                <th>Grid</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let payment of payments">
-                <td>{{ payment.name }}</td>
-                <td>{{ payment.amount }}</td>
-                <td>{{ payment.code }}</td>
-                <td>{{ payment.gridCount }}</td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
 </div>
-
-<button [routerLink]="['/generator']">Code generator</button>

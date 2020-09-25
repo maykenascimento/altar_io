@@ -1,17 +1,37 @@
 <div class="container">
-    <div class="row">
-        <div class="col"><input type="text" maxlength="1" (keyup)="setUserInput($event)" value="{{userInput}}" [disabled]="entryLocked"></div>
-        <div class="col fill-space"></div>
-        <div class="col"><button (click)="startGenerate()">Generate 2D Grid</button></div>
+    <div class="row main-menu">
+        <div class="col-auto">
+            <div class="div-frame">Code generator</div>
+        </div>
+        <div class="col">
+            <button class="btn" [routerLink]="['/payments']">payments</button>
+        </div>
     </div>
-    <table>
-        <tr *ngFor="let row of listCharacteres">
-            <td *ngFor="let column of row">{{ column }}</td>
-        </tr>
-    </table>
-    <div class="is-running">
-        <div class="signal" [ngClass]="{'running': isRunning}"></div> Live</div>
-    <div class="show-code">Your code: {{ currentCode }}</div>
+    <div class="row">
+        <div class="col-auto">
+            <label>Character</label>
+            <input class="user-char" type="text" maxlength="1" placeholder="Character" (keyup)="setUserInput($event)" value="{{userInput}}" [disabled]="entryLocked"></div>
+        <div class="col"></div>
+        <div class="col-auto"><button class="btn btn-filled generate-button" (click)="startGenerate()">Generate 2D Grid</button></div>
+    </div>
+    <div class="row">
+        <table class="table table-border col">
+            <tr *ngFor="let row of listCharacters">
+                <td class="text-center" *ngFor="let column of row">{{ column }}</td>
+            </tr>
+            <tr *ngIf="listCharacters.length == 0">
+                <td colspan="10" class="text-center" style="color: #999999;">Empty table, click on generate 2D grid</td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <div class="signal" [ngClass]="{'is-running': isRunning}"></div> Live
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <div class="show-code">Your code: {{ currentCode }}</div>
+        </div>
+    </div>
 </div>
-
-<button [routerLink]="['/payments']">payments</button>

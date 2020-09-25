@@ -21,8 +21,11 @@ export class GeneratorComponent implements OnInit {
     return this.codeGeneratorService.FinalCode;
   }
 
-  public get listCharacteres() {
+  public get listCharacters() {
     return this.codeGeneratorService.DataList;
+    if (this.codeGeneratorService.IsRunning) {
+    }
+    return String[10][10];
   }
 
   public get userInput() : string {
