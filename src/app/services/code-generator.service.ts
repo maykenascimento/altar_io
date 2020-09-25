@@ -81,7 +81,7 @@ export class CodeGeneratorService {
 
   // This function will get two positions of the character array based on second time
   private calcCode() {
-    const seconds = ("00" + this.time.getSeconds()).slice(-2);
+    const seconds = this.time.toTimeString().split(" ")[0].split(":")[2];
     const splited = Array.from(seconds);
     const length1 = parseInt(splited[0]);
     const length2 = parseInt(splited[1]);
@@ -104,21 +104,12 @@ export class CodeGeneratorService {
     }
 
     if (firstLetterCount > 9) {
-      if (length1 < length2) {
-        firstLetterCount = Math.round(firstLetterCount / length1);
-      } else {
-        firstLetterCount = Math.round(firstLetterCount / length2);
-      }
+      firstLetterCount = this.getRoundedCode(firstLetterCount);
     }
 
     if (secondLetterCount > 9) {
-      if (length1 < length2) {
-        secondLetterCount = Math.round(secondLetterCount / length1);
-      } else {
-        secondLetterCount = Math.round(secondLetterCount / length2);
-      }
+      secondLetterCount = this.getRoundedCode(secondLetterCount);
     }
-
     this.finalCode = `${firstLetterCount}${secondLetterCount}`;
   }
 
@@ -146,5 +137,22 @@ export class CodeGeneratorService {
     clearInterval(this.interval);
     this.interval = undefined;
     this.isRunning = false;
+  }
+
+  // This function will calculate to get a value less than 9 if the value is greater.
+  private getRoundedCode(value: number): number {
+    let divisor = 2;
+    let divisionResult = value;
+    do {
+      divisionResult /= divisor;
+      divisor += 1;
+    } while (divisionResult > 9);
+    if (divisionResult > 9) {
+      divisionResult = 9;
+    }
+    else {
+      divisionResult = Math.round(divisionResult);
+    }
+    return divisionResult;
   }
 }
